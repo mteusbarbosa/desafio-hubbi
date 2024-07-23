@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Film } from "../../Interfaces/Films";
+import { Film } from "../../Interfaces/Filmes";
 import { Veiculos } from "../../Interfaces/Veiculos";
 
 export default function VeiculosId() {

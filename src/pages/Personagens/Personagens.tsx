@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-interface Personagem {
-    name: string;
-    url: string;
-}
+import { Personagem } from "../../Interfaces/Personagens";
 
 interface StarWarsData {
     results: Personagem[];

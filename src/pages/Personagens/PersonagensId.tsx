@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Planet } from "../Planetas/PlanetsId";
-import { Film } from "../../Interfaces/Films";
+
 import { Personagens } from "../../Interfaces/Personagens";
+import { Planetas } from "../../Interfaces/Planetas";
+import { Filmes } from "../../Interfaces/Filmes";
+
 
 export default function PersonagensId() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [personagensData, setPersonagensData] = useState<Personagens | null>(null);
-    const [planetData, setPlanetData] = useState<Planet | null>(null);
-    const [filmesData, setFilmesData] = useState<Film[]>([]);
+    const [planetData, setPlanetData] = useState<Planetas | null>(null);
+    const [filmesData, setFilmesData] = useState<Filmes[]>([]);
     const [urlPersonagens] = useState<string>(`https://swapi.dev/api/people/${id}/`);
 
     useEffect(() => {
@@ -22,7 +24,7 @@ export default function PersonagensId() {
                 setIsLoading(false);
 
                 try {
-                    const response2 = await axios.get<Planet>(response.data.homeworld);
+                    const response2 = await axios.get<Planetas>(response.data.homeworld);
                     setPlanetData(response2.data);
                     console.log(response2.data)
                     setIsLoading(false);
@@ -32,7 +34,7 @@ export default function PersonagensId() {
                 }
 
                 try {
-                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Film>(filmUrl));
+                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Filmes>(filmUrl));
                     const filmResponses = await Promise.all(filmRequests);
                     const films = filmResponses.map(res => res.data);
                     setFilmesData(films);

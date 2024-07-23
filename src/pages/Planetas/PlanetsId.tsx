@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Film } from "../../Interfaces/Films";
-import { Planets } from "../../Interfaces/Planets";
+import { Filmes } from "../../Interfaces/Filmes";
+import { Planetas } from "../../Interfaces/Planetas";
 
 export default function PlanetsId() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [planetData, setPlanetData] = useState<Planets | null>(null);
-    const [filmesData, setFilmesData] = useState<Film[]>([]);
-    const [urlPlanets] = useState<string>(`https://swapi.py4e.com/api/planets/${id}/`);
+    const [planetData, setPlanetData] = useState<Planetas | null>(null);
+    const [filmesData, setFilmesData] = useState<Filmes[]>([]);
+    const [urlPlanetas] = useState<string>(`https://swapi.py4e.com/api/planets/${id}/`);
 
     useEffect(() => {
         const fetchPlanets = async () => {
             try {
-                const response = await axios.get<Planets>(urlPlanets);
+                const response = await axios.get<Planetas>(urlPlanetas);
                 setPlanetData(response.data);
                 console.log(response.data)
                 setIsLoading(false);
 
                 // Fetch all films related to this vehicle
                 try {
-                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Film>(filmUrl));
+                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Filmes>(filmUrl));
                     const filmResponses = await Promise.all(filmRequests);
                     const films = filmResponses.map(res => res.data);
                     setFilmesData(films);
@@ -36,7 +36,7 @@ export default function PlanetsId() {
         };
 
         fetchPlanets();
-    }, [urlPlanets]);
+    }, [urlPlanetas]);
 
     let content;
 

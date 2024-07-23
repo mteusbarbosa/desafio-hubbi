@@ -1,4 +1,9 @@
-export interface Planets {
+export interface Planeta {
+    name: string;
+    url: string;
+}
+
+export interface Planetas {
     name: string;
     rotation_period: string;
     orbital_period: string;

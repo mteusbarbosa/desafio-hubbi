@@ -1,3 +1,8 @@
+export interface Personagem {
+    name: string;
+    url: string;
+}
+
 export interface Personagens {
     name: string;
     height: string;

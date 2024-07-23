@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Film } from "../../Interfaces/Films";
-import { Nave } from "../../Interfaces/Naves";
+import { Naves } from "../../Interfaces/Naves";
+import { Filmes } from "../../Interfaces/Filmes";
 
 export default function NavesId() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [naveData, setNaveData] = useState<Nave | null>(null);
-    const [filmesData, setFilmesData] = useState<Film[]>([]);
+    const [naveData, setNaveData] = useState<Naves | null>(null);
+    const [filmesData, setFilmesData] = useState<Filmes[]>([]);
     const [urlStarships] = useState<string>(`https://swapi.dev/api/starships/${id}/`);
 
     useEffect(() => {
         const fetchNaves = async () => {
             try {
-                const response = await axios.get<Nave>(urlStarships);
+                const response = await axios.get<Naves>(urlStarships);
                 setNaveData(response.data);
                 console.log(response.data)
                 setIsLoading(false);
 
                 try {
-                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Film>(filmUrl));
+                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Filmes>(filmUrl));
                     const filmResponses = await Promise.all(filmRequests);
                     const films = filmResponses.map(res => res.data);
                     setFilmesData(films);

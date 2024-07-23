@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-interface Planet {
-    name: string;
-    url: string;
-}
+import { Planeta } from "../../Interfaces/Planetas";
 
 interface StarWarsData {
-    results: Planet[];
+    results: Planeta[];
     next: string | null;
     previous: string | null;
 }

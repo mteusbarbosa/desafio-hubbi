@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-interface Naves {
-    name: string;
-    url: string;
-}
+import { Nave } from "../../Interfaces/Naves";
 
 interface StarWarsData {
-    results: Naves[];
+    results: Nave[];
     next: string | null;
     previous: string | null;
 }

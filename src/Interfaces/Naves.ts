@@ -1,5 +1,10 @@
 export interface Nave {
     name: string;
+    url: string;
+}
+
+export interface Naves {
+    name: string;
     model: string;
     manufacturer: string;
     cost_in_credits: string;
