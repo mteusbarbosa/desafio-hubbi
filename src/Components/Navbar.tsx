@@ -3,6 +3,7 @@ import planetas from "../assets/planets.svg"
 import sabres from "../assets/sabres.svg"
 import naves from "../assets/starships.svg"
 import veiculos from "../assets/vehicles.svg"
+import { FiLogIn } from "react-icons/fi"
 
 export default function Navbar() {
     return (
@@ -31,6 +32,12 @@ export default function Navbar() {
                     <Link to="/planetas" className="flex items-center w-full p-2 hover:bg-gray-700 rounded cursor-pointer">
                         <span className="flex-1">Planetas</span>
                         <img src={planetas} alt="Sabre" className="w-10 h-10 ml-2" />
+                    </Link>
+                </li>
+                <li className="mt-10 flex items-center self-end">
+                    <Link to="/login" className="flex items-center w-full p-2 hover:bg-gray-700 rounded cursor-pointer">
+                        <span className="flex-1">Login</span>
+                        <FiLogIn className="w-10 h-10 ml-2" />
                     </Link>
                 </li>
             </ul>
