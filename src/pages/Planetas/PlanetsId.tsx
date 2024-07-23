@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-
-interface Planet {
-    name: string;
-    rotation_period: string;
-    orbital_period: string;
-    diameter: string;
-    climate: string;
-    gravity: string;
-    terrain: string;
-    surface_water: string;
-    population: string;
-    residents: string[];  // Array de URLs
-    films: string[];      // Array de URLs
-    created: string;      // Data no formato ISO 8601
-    edited: string;       // Data no formato ISO 8601
-    url: string;          // URL
-}
+import { Film } from "../../Interfaces/Films";
+import { Planets } from "../../Interfaces/Planets";
 
 export default function PlanetsId() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [planetData, setPlanetData] = useState<Planet | null>(null);
+    const [planetData, setPlanetData] = useState<Planets | null>(null);
+    const [filmesData, setFilmesData] = useState<Film[]>([]);
     const [urlPlanets] = useState<string>(`https://swapi.py4e.com/api/planets/${id}/`);
 
     useEffect(() => {
         const fetchPlanets = async () => {
             try {
-                const response = await axios.get<Planet>(urlPlanets);
+                const response = await axios.get<Planets>(urlPlanets);
                 setPlanetData(response.data);
                 console.log(response.data)
                 setIsLoading(false);
+
+                // Fetch all films related to this vehicle
+                try {
+                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Film>(filmUrl));
+                    const filmResponses = await Promise.all(filmRequests);
+                    const films = filmResponses.map(res => res.data);
+                    setFilmesData(films);
+                    console.log(films);
+                } catch (error) {
+                    console.error("Error fetching films:", error);
+                }
             } catch (error) {
                 console.error("Error fetching planets:", error);
                 setIsLoading(false);
@@ -80,13 +77,12 @@ export default function PlanetsId() {
                     <strong>População:</strong> {planetData.population}
                 </li>
                 <li className="border p-4 rounded">
-                    <strong>Criado:</strong> {planetData.created}
-                </li>
-                <li className="border p-4 rounded">
-                    <strong>Editado:</strong> {planetData.edited}
-                </li>
-                <li className="border p-4 rounded">
-                    <strong>URL:</strong> {planetData.url}
+                    <strong>Filmes:</strong>
+                    <ul>
+                        {filmesData.map((film, index) => (
+                            <li key={index}>{film.title}</li>
+                        ))}
+                    </ul>
                 </li>
             </ul>
         );

@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 
 interface Planet {
     name: string;
-    climate: string;
-    terrain: string;
-    population: string;
+    url: string;
 }
 
 interface StarWarsData {
@@ -17,7 +15,6 @@ interface StarWarsData {
 
 export default function Planets() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [idReference, setIdReference] = useState(1);
     const [starWarsDataPlanets, setStarWarsDataPlanets] = useState<StarWarsData | null>(null);
     const [urlPlanets, setUrlPlanets] = useState<string>(`https://swapi.py4e.com/api/planets/?page=1`);
 
@@ -41,7 +38,6 @@ export default function Planets() {
         if (starWarsDataPlanets?.next) {
             setIsLoading(true);
             setUrlPlanets(starWarsDataPlanets.next);
-            setIdReference((idReference) => idReference + 10);
         }
     }
 
@@ -49,12 +45,7 @@ export default function Planets() {
         if (starWarsDataPlanets?.previous) {
             setIsLoading(true);
             setUrlPlanets(starWarsDataPlanets.previous);
-            setIdReference((idReference) => idReference - 10);
         }
-    }
-
-    function handleDetalhesOnClick(index: number) {
-        console.log(idReference + index)
     }
 
     let content;
@@ -68,12 +59,16 @@ export default function Planets() {
     } else {
         content = (
             <ul>
-                {starWarsDataPlanets.results.map((planeta, index) => (
-                      <li className="mb-2 border p-2 rounded flex justify-between items-center" key={planeta.name}>
-                      <span>{planeta.name}</span>
-                      <Link to={`/planetas/${idReference + index}/`}><button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button></Link>
-                  </li>
-                ))}
+                {starWarsDataPlanets.results.map((planets) => {
+                    const regex = /\/(\d+)\/$/;
+                    const match = regex.exec(planets.url);
+                    const starshipId = match ? match[1] : null;
+                    return (
+                        <li className="mb-2 border p-2 rounded flex justify-between items-center" key={planets.name}>
+                            <span>{planets.name}</span>
+                            <Link to={`/planetas/${starshipId}/`}><button className="px-4 py-2 bg-blue-500 text-white rounded">Detalhes</button></Link>
+                        </li>)
+                })}
             </ul>
         );
     }
