@@ -6,8 +6,9 @@ import veiculos from "./assets/vehicles.svg"
 import Home from "./pages/Home"
 import Naves from "./pages/Naves"
 import Personagens from "./pages/Personagens"
-import Planets from "./pages/Planets"
+import Planets from "./pages/Planetas/Planets"
 import Veiculos from "./pages/Veiculos"
+import PlanetsId from "./pages/Planetas/PlanetsId"
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/naves" element={<Naves />} />
           <Route path="/personagens" element={<Personagens />} />
           <Route path="/planetas" element={<Planets />} />
+          <Route path="/planetas/:id" element={<PlanetsId />} />
           <Route path="/veiculos" element={<Veiculos />} />
         </Routes>
       </div>

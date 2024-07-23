@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Planet {
     name: string;
@@ -70,7 +71,7 @@ export default function Planets() {
                 {starWarsDataPlanets.results.map((planeta, index) => (
                       <li className="mb-2 border p-2 rounded flex justify-between items-center" key={planeta.name}>
                       <span>{planeta.name}</span>
-                      <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button>
+                      <Link to={`/planetas/${idReference + index}/`}><button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button></Link>
                   </li>
                 ))}
             </ul>
