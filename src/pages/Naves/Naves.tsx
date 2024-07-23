@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 interface Naves {
     name: string;
+    url: string;
 }
 
 interface StarWarsData {
@@ -13,7 +15,6 @@ interface StarWarsData {
 
 export default function Naves() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [idReference, setIdReference] = useState(1);
     const [starWarsDataNaves, setStarWarsDataNaves] = useState<StarWarsData | null>(null);
     const [urlNaves, setUrlNaves] = useState<string>(`https://swapi.py4e.com/api/starships/?page=1`);
 
@@ -37,7 +38,6 @@ export default function Naves() {
         if (starWarsDataNaves?.next) {
             setIsLoading(true);
             setUrlNaves(starWarsDataNaves.next);
-            setIdReference((idReference) => idReference + 10);
         }
     }
 
@@ -45,12 +45,7 @@ export default function Naves() {
         if (starWarsDataNaves?.previous) {
             setIsLoading(true);
             setUrlNaves(starWarsDataNaves.previous);
-            setIdReference((idReference) => idReference - 10);
         }
-    }
-
-    function handleDetalhesOnClick(index: number){
-        console.log(idReference + index)
     }
 
     let content;
@@ -64,12 +59,16 @@ export default function Naves() {
     } else {
         content = (
             <ul>
-                {starWarsDataNaves.results.map((naves, index) => (
-                    <li className="mb-2 border p-2 rounded flex justify-between items-center" key={naves.name}>
-                        <span>{naves.name}</span>
-                        <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button>
-                    </li>
-                ))}
+                {starWarsDataNaves.results.map((naves) => {
+                    const regex = /\/(\d+)\/$/;
+                    const match = regex.exec(naves.url);
+                    const starshipId = match ? match[1] : null;
+                    return (
+                        <li className="mb-2 border p-2 rounded flex justify-between items-center" key={naves.name}>
+                            <span>{naves.name}</span>
+                            <Link to={`/naves/${starshipId}/`}><button className="px-4 py-2 bg-blue-500 text-white rounded">Detalhes</button></Link>
+                        </li>)
+                })}
             </ul>
         );
     }
