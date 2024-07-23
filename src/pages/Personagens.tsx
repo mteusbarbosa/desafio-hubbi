@@ -3,9 +3,6 @@ import axios from "axios";
 
 interface Personagem {
     name: string;
-    climate: string;
-    terrain: string;
-    population: string;
 }
 
 interface StarWarsData {
@@ -16,6 +13,7 @@ interface StarWarsData {
 
 export default function Personagens() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [idReference, setIdReference] = useState(1);
     const [starWarsDataPersonagens, setStarWarsDataPersonagens] = useState<StarWarsData | null>(null);
     const [urlPersonagens, setUrlPersonagens] = useState<string>(`https://swapi.py4e.com/api/people/?page=1`);
 
@@ -39,6 +37,7 @@ export default function Personagens() {
         if (starWarsDataPersonagens?.next) {
             setIsLoading(true);
             setUrlPersonagens(starWarsDataPersonagens.next);
+            setIdReference((idReference) => idReference + 10);
         }
     }
 
@@ -46,7 +45,12 @@ export default function Personagens() {
         if (starWarsDataPersonagens?.previous) {
             setIsLoading(true);
             setUrlPersonagens(starWarsDataPersonagens.previous);
+            setIdReference((idReference) => idReference - 10);
         }
+    }
+
+    function handleDetalhesOnClick(index: number){
+        console.log(idReference + index)
     }
 
     let content;
@@ -60,9 +64,10 @@ export default function Personagens() {
     } else {
         content = (
             <ul>
-                {starWarsDataPersonagens.results.map((Personagem) => (
-                    <li className="mb-2 border p-2 rounded" key={Personagem.name}>
-                        {Personagem.name}
+                {starWarsDataPersonagens.results.map((personagem, index) => (
+                    <li className="mb-2 border p-2 rounded flex justify-between items-center" key={personagem.name}>
+                        <span>{personagem.name}</span>
+                        <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button>
                     </li>
                 ))}
             </ul>

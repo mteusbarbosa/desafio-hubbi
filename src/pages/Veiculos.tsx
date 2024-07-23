@@ -13,6 +13,7 @@ interface StarWarsData {
 
 export default function Veiculos() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [idReference, setIdReference] = useState(1);
     const [starWarsDataVeiculos, setStarWarsDataVeiculos] = useState<StarWarsData | null>(null);
     const [urlVeiculos, setUrlVeiculos] = useState<string>(`https://swapi.py4e.com/api/vehicles/?page=1`);
 
@@ -36,6 +37,7 @@ export default function Veiculos() {
         if (starWarsDataVeiculos?.next) {
             setIsLoading(true);
             setUrlVeiculos(starWarsDataVeiculos.next);
+            setIdReference((idReference) => idReference + 10);
         }
     }
 
@@ -43,7 +45,12 @@ export default function Veiculos() {
         if (starWarsDataVeiculos?.previous) {
             setIsLoading(true);
             setUrlVeiculos(starWarsDataVeiculos.previous);
+            setIdReference((idReference) => idReference - 10);
         }
+    }
+
+    function handleDetalhesOnClick(index: number){
+        console.log(idReference + index)
     }
 
     let content;
@@ -57,9 +64,10 @@ export default function Veiculos() {
     } else {
         content = (
             <ul>
-                {starWarsDataVeiculos.results.map((Veiculo) => (
-                    <li className="mb-2 border p-2 rounded" key={Veiculo.name}>
-                        {Veiculo.name}
+                {starWarsDataVeiculos.results.map((veiculo, index) => (
+                    <li className="mb-2 border p-2 rounded flex justify-between items-center" key={veiculo.name}>
+                        <span>{veiculo.name}</span>
+                        <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={() => handleDetalhesOnClick(index)}>Detalhes</button>
                     </li>
                 ))}
             </ul>
