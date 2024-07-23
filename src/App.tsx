@@ -4,11 +4,14 @@ import sabres from "./assets/sabres.svg"
 import naves from "./assets/starships.svg"
 import veiculos from "./assets/vehicles.svg"
 import Home from "./pages/Home"
-import Naves from "./pages/Naves"
-import Personagens from "./pages/Personagens"
 import Planets from "./pages/Planetas/Planets"
-import Veiculos from "./pages/Veiculos"
 import PlanetsId from "./pages/Planetas/PlanetsId"
+import Naves from "./pages/Naves/Naves"
+import NavesId from "./pages/Naves/NavesId"
+import Personagens from "./pages/Personagens/Personagens"
+import PersonagensId from "./pages/Personagens/PersonagensId"
+import Veiculos from "./pages/Veiculos/Veiculos"
+import VeiculosId from "./pages/Veiculos/VeiculosId"
 
 function App() {
   return (
@@ -46,10 +49,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/naves" element={<Naves />} />
-          <Route path="/personagens" element={<Personagens />} />
-          <Route path="/planetas" element={<Planets />} />
-          <Route path="/planetas/:id" element={<PlanetsId />} />
           <Route path="/veiculos" element={<Veiculos />} />
+          <Route path="/planetas" element={<Planets />} />
+          <Route path="/personagens" element={<Personagens />} />
+          
+          <Route path="/naves/:id" element={<NavesId />} />
+          <Route path="/veiculos/:id" element={<VeiculosId />} />
+          <Route path="/planetas/:id" element={<PlanetsId />} />
+          <Route path="/personagens/:id" element={<PersonagensId />} />
         </Routes>
       </div>
     </div >
