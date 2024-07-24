@@ -36,6 +36,6 @@ Repositório para compartilhamento do código de resolução do desafio frontend
 4. Execute o programa rodando o comando `bun run dev` ou `npm run dev`
 5. Efetue login usando as credenciais `user@hubbi.com` para usuário e `password` para senha
 
-### Acessar o projeto no Netlify
+### Acessar o projeto na Vercel
 
-[Deploy no Netlify](https://desafio-hubby-mteusbarbosa.netlify.app)
+[Deploy na Vercel](https://desafio-hubbi.vercel.app/)
