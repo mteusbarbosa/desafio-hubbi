@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { Film } from "../../Interfaces/Filmes";
 import { Veiculos } from "../../Interfaces/Veiculos";
+import { Filmes } from "../../Interfaces/Filmes";
 
 export default function VeiculosId() {
     const { id } = useParams()
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [veiculosData, setVeiculosData] = useState<Veiculos | null>(null);
-    const [filmesData, setFilmesData] = useState<Film[]>([]);
+    const [filmesData, setFilmesData] = useState<Filmes[]>([]);
     const [urlVeiculos] = useState<string>(`https://swapi.dev/api/vehicles/${id}/`);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function VeiculosId() {
 
                 // Fetch all films related to this vehicle
                 try {
-                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Film>(filmUrl));
+                    const filmRequests = response.data.films.map((filmUrl) => axios.get<Filmes>(filmUrl));
                     const filmResponses = await Promise.all(filmRequests);
                     const films = filmResponses.map(res => res.data);
                     setFilmesData(films);
