@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# Desafio Hubbi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Repositório para compartilhamento do código de resolução do desafio frontend da Hubbi
 
-Currently, two official plugins are available:
+## Requisitos de Sistema
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Criar o projeto usando `ReactJS`
+- Fazer a aplicação utilizando `Typescript`
+- Utilizar `Tailwind CSS` para a estilização do projeto
+- Consumir a API `SWAPI`
+- Implementar um login usando JWT
 
-## Expanding the ESLint configuration
+### Para usuários não autenticados
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Listar naves
+- Listar personagens
 
-- Configure the top-level `parserOptions` property like this:
+### Para usuários autenticados
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Listar detalhe dos personagens
+- Listar detalhe das naves
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Funcionalidades extras
+
+- Listar veículos
+- Listar detalhes de veículos
+- Listar planetas
+- Listar detalhes de planetas
+- Implementar logout
+
+## Como rodar o projeto
+
+1. Escolha um diretório em seu computador e execute `git clone https://github.com/mteusbarbosa/desafio-hubbi.git`
+2. Abra a pasta no Visual Studio Code ou outra IDE de preferência
+3. Abra o terminal e execute o comando `bun install` ou `npm install`
+4. Execute o programa rodando o comando `bun run dev` ou `npm run dev`
+5. Efetue login usando as credenciais `user@hubbi.com` para usuário e `password` para senha
