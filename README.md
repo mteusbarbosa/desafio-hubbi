@@ -26,7 +26,7 @@ Repositório para compartilhamento do código de resolução do desafio frontend
 - Listar detalhes de veículos
 - Listar planetas
 - Listar detalhes de planetas
-- Implementar logout
+- Realizar logout
 
 ## Como rodar o projeto
 
@@ -35,3 +35,7 @@ Repositório para compartilhamento do código de resolução do desafio frontend
 3. Abra o terminal e execute o comando `bun install` ou `npm install`
 4. Execute o programa rodando o comando `bun run dev` ou `npm run dev`
 5. Efetue login usando as credenciais `user@hubbi.com` para usuário e `password` para senha
+
+### Acessar o projeto no Netlify
+
+[Deploy no Netlify](https://desafio-hubby-mteusbarbosa.netlify.app)
